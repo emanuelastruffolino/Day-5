@@ -42,4 +42,16 @@ bf.sts<- seqformat(bfsp, id = "id", begin = "begin",
                         compressed = FALSE, process = TRUE, pdata = bf.pdata,
                         pvar = c("idpers", "birthyr"), limit = limit)
 
-#this last command doesn't work...
+#5. Build a state sequence object from bf.sts and make a d-plot of the sequences.
+bf.seq<-seqdef(bf.sts, informat="STS", missing=NA)
+seqdplot(bf.seq)
+
+#6. Using seqformat(), transform the state sequences in compressed SPS format. 
+  #Display the first sequences in that compressed SPS form.
+bf.sps<- seqformat(bf.sts, from ="STS", to ="SPS", compressed=TRUE)
+bf.sps [1:3,]
+  
+#7. Using seqformat(), transform the state sequences in SRS format. Cross tabulate
+   #the current state in any year T with the state two years before.
+bf.srs<-seqformat(bf.sts, from ="STS", to="SRS")
+bf.srs [1:3,]
